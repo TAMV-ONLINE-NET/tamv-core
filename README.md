@@ -58,9 +58,9 @@ TAMV usa dos mapas complementarios:
 
 ```text
 ┌───────────────────────────────────────────────────────────────┐
-│ CAPA 7 · Metacivilización, Archivo Histórico y Legado         │
+│ CAPA 7 · Metacivilización, Archivo Histórico y Legado          │
 ├───────────────────────────────────────────────────────────────┤
-│ CAPA 6 · Gobernanza, Consola Guardián, SACDAO y HITL          │
+│ CAPA 6 · Gobernanza, Consola Guardián, SACDAO y HITL           │
 ├───────────────────────────────────────────────────────────────┤
 │ CAPA 5 · Economía Ética, TAMV-T, FRI y protocolos antifraude  │
 ├───────────────────────────────────────────────────────────────┤
@@ -264,4 +264,281 @@ Utilidad operativa neta distribuible
 | Porción | Uso |
 |---:|---|
 | **20%** | Becas, reparación comunitaria, apoyo a creadores y acceso educativo |
-| **30%** 
+| **30%** | Cloud, nodos, GPU, ancho de banda, seguridad, licencias y operación |
+| **50%** | Reservas, expansión estratégica, investigación y sostenibilidad |
+
+### Protocolos
+
+- **Fénix:** canaliza recursos de reparación, becas, acceso educativo y apoyo a creadores.
+- **Hoyo Negro:** protocolo de contención ante fraude, abuso o comportamiento financiero anómalo; debe incluir revisión humana, bitácora, debido proceso y controles regulatorios aplicables.
+
+### Fuentes de sostenibilidad
+
+| Dominio | Ejemplos |
+|---|---|
+| Membresías | Creador, gremial, institucional, soporte premium |
+| Economía creadora | Cursos, contenido digital, marketplace XR, certificaciones |
+| Infraestructura | Render XR, hosting, observabilidad y nodos institucionales |
+| IA y software | Licencias Isabella, APIs, integraciones y white-label |
+| Servicios profesionales | Eventos XR, consultoría, implementación y formación |
+| Investigación | Estudios agregados con consentimiento, anonimización y controles éticos |
+
+> Todo producto de cómputo intensivo debe tener límites de uso, créditos o tarifas que cubran su costo real. Ningún modelo económico elimina obligaciones regulatorias, fiscales, de consumo, prevención de fraude o protección de datos.
+
+---
+
+## Experiencia XR
+
+### CPV++
+
+La **Capa Primordial Visual** define una experiencia de presencia que evita mecánicas de captura de atención:
+
+- Sin feeds infinitos.
+- Sin rankings sociales opacos.
+- Sin contadores de popularidad como métrica central.
+- Con accesibilidad y modos neurodivergentes.
+- Con espacios persistentes que registran historia bajo reglas de privacidad.
+- Con carga progresiva de activos, WebGPU y degradación elegante.
+
+### DreamSpaces™
+
+Los DreamSpaces™ son entornos 3D/XR persistentes con reglas de presencia, iluminación dinámica, audio espacial y lógica de eventos. Su “4D” se refiere al modelado de tiempo, memoria verificable y evolución contextual del espacio, no a una afirmación física extraordinaria.
+
+```text
+4D TAMV = Tiempo + Memoria verificable + Contexto colectivo
+```
+
+---
+
+## Gobernanza
+
+### SACDAO y Consola Guardián
+
+La gobernanza combina participación federada con supervisión humana. La **Consola Guardián** presenta acciones sensibles para aprobación, edición, rechazo o escalamiento.
+
+Una ponderación conceptual puede considerar:
+
+```text
+peso_de_gobernanza =
+  contribución verificable × ética × coherencia histórica
+```
+
+Los tokens o recursos económicos no deben otorgar poder absoluto ni permitir alterar garantías fundamentales de dignidad, seguridad, privacidad y debido proceso.
+
+### Evaluaciones ERIE
+
+Las evaluaciones **ERIE** deben realizarse antes de desplegar automatizaciones de alto impacto:
+
+- Riesgo de discriminación o exclusión.
+- Riesgo de daño económico, emocional o reputacional.
+- Impacto sobre privacidad, seguridad y derechos.
+- Capacidad de explicación, apelación y reversión.
+- Necesidad de revisión humana.
+
+---
+
+## Contratos TypeScript
+
+```ts
+export interface ZeroTrustSession {
+  clientDid: string;
+  sessionNonce: string;
+  signature: string;
+  issuedAt: number;
+  expiresAt: number;
+}
+
+export interface BookPIEntry {
+  id: string;
+  eventType: string;
+  userId: string;
+  hash: string;
+  previousHash: string | null;
+  metadata: Record<string, unknown>;
+  createdAt: string;
+}
+
+export interface IsabellaRequest {
+  intent: string;
+  context: Record<string, unknown>;
+  userId: string;
+  session: ZeroTrustSession;
+}
+
+export interface IsabellaResponse {
+  decision: "approve" | "deny" | "escalate";
+  explanation: string;
+  confidence: number;
+  ethicalFlags: string[];
+  requiresHitl: boolean;
+  actionPayload?: Record<string, unknown>;
+}
+
+export interface IntegrityEvent {
+  type: "CORRUPTION_DETECTED" | "SAFE_MODE_ENTERED" | "INTEGRITY_RESTORED";
+  nodeId: string;
+  severity: "low" | "medium" | "high" | "critical";
+  metadata: Record<string, unknown>;
+  msrHash: string;
+  timestamp: string;
+}
+```
+
+---
+
+## Modelo de datos
+
+Ejemplo de entidades principales en PostgreSQL/Supabase:
+
+```sql
+CREATE TABLE guardian_actions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  action_type TEXT NOT NULL,
+  target_id UUID,
+  target_type TEXT,
+  status TEXT NOT NULL DEFAULT 'pending'
+    CHECK (status IN ('pending', 'approved', 'denied', 'escalated')),
+  guardian_id UUID REFERENCES profiles(id),
+  isabella_recommendation TEXT,
+  explanation TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  resolved_at TIMESTAMPTZ
+);
+
+CREATE TABLE economic_transactions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  from_user_id UUID REFERENCES profiles(id),
+  to_user_id UUID REFERENCES profiles(id),
+  amount NUMERIC(18, 8) NOT NULL CHECK (amount > 0),
+  currency TEXT NOT NULL DEFAULT 'TAMV-T',
+  transaction_type TEXT NOT NULL,
+  fee_percentage NUMERIC(5, 2) NOT NULL DEFAULT 0,
+  fee_amount NUMERIC(18, 8) NOT NULL DEFAULT 0,
+  msr_hash TEXT NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE federated_nodes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  node_name TEXT NOT NULL,
+  node_type TEXT NOT NULL CHECK (node_type IN ('edge', 'fog', 'cloud')),
+  status TEXT NOT NULL DEFAULT 'active',
+  ast_state TEXT NOT NULL DEFAULT 'NORMAL'
+    CHECK (ast_state IN ('NORMAL', 'OBLIVION', 'BUNKER', 'ORPHAN', 'PHOENIX')),
+  last_heartbeat TIMESTAMPTZ NOT NULL DEFAULT now(),
+  metrics JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE TABLE bookpi_entries (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  event_type TEXT NOT NULL,
+  user_id UUID REFERENCES profiles(id),
+  hash TEXT NOT NULL UNIQUE,
+  previous_hash TEXT,
+  metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+ALTER TABLE guardian_actions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE economic_transactions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE federated_nodes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE bookpi_entries ENABLE ROW LEVEL SECURITY;
+```
+
+> Habilitar RLS no basta: agrega políticas explícitas, separación de funciones, registros de auditoría, pruebas de autorización y validaciones del lado del servidor.
+
+---
+
+## Roadmap
+
+| Fase | Estado | Entregable |
+|---|---|---|
+| **0 · Origen humano** | Completada | Constitución, dedicatoria y arquitectura canónica |
+| **1 · Infraestructura mínima viva** | En ejecución | Auth, perfiles, BookPI, Isabella, Guardián y DevHub |
+| **2 · Economía creadora** | Planeada | Membresías, marketplace, UTAMV y Fondo Fénix |
+| **3 · XR civilizatorio** | Planeada | Atlas 3D, DreamSpaces y experiencia institucional |
+| **4 · Federación global** | Planeada | Nodos multi-región, MSR y SACDAO |
+| **5 · Integración física** | Planeada | Edge, gateways hápticos e identidad físico-digital |
+| **6 · Expansión institucional** | Planeada | Universidades, municipios y certificaciones |
+| **7 · Archivo perpetuo** | Planeada | Sucesión programada y memoria histórica distribuida |
+
+### Backlog inmediato
+
+1. Implementar `bookpi-write` con canonicalización, hash SHA-256, idempotencia, firma y control de autorización.
+2. Desplegar `isabella-chat` con sanitización, KEC, evaluación de riesgo, memoria vectorial y trazabilidad.
+3. Construir `/guardian` con colas de aprobación HITL, roles, bitácora y mecanismos de apelación.
+4. Publicar DevHub/OpenAPI para verificación de DIDs, credenciales y hashes de BookPI.
+5. Definir políticas RLS, pruebas de aislamiento multitenant y auditoría de accesos.
+6. Incorporar CI/CD con análisis estático, pruebas, escaneo de secretos, SBOM y firma de artefactos.
+
+---
+
+## Desarrollo local
+
+El repositorio está construido con **Bun**, **TanStack Start**, **Vite** y **TypeScript**.
+
+### Requisitos
+
+- Bun reciente.
+- Node.js solo si alguna integración o herramienta complementaria lo requiere.
+- Variables de entorno para los proveedores que se integren: base de datos, autenticación, almacenamiento, modelos de IA y observabilidad.
+
+### Instalación
+
+```bash
+git clone https://github.com/TAMV-ONLINE-NET/tamv-core.git
+cd tamv-core
+bun install
+bun run dev
+```
+
+### Comandos habituales
+
+```bash
+bun run dev
+bun run build
+bun run lint
+bun run test
+```
+
+> Consulta `package.json` para confirmar los scripts disponibles en la versión actual del proyecto.
+
+---
+
+## Seguridad
+
+Antes de operar con datos reales, pagos, biometría, identidad verificable o modelos de IA:
+
+- Realiza análisis de amenazas y pruebas de penetración.
+- Implementa gestión de secretos, rotación de claves y firmas verificables.
+- Separa entornos de desarrollo, pruebas y producción.
+- Define retención de datos, exportación, borrado y respuesta a incidentes.
+- Audita dependencias, imágenes, artefactos y configuraciones de despliegue.
+- Establece revisión legal y regulatoria por jurisdicción.
+- Mantén aprobación humana para acciones irreversibles o de alto impacto.
+
+Consulta reportes de vulnerabilidades mediante los canales de seguridad configurados para la organización o repositorio.
+
+---
+
+## Declaración canónica
+
+> TAMV es una arquitectura de memoria, dignidad, justicia técnica y presencia soberana.  
+> La ley y los derechos humanos deben orientar al código.  
+> La memoria no debe ser un privilegio corporativo.  
+> La inteligencia artificial debe permanecer al servicio de la conciencia humana.
+
+---
+
+## Autoría
+
+**Edwin Oswaldo Castillo Trejo**  
+*Anubis Villaseñor*  
+ORCID: `0009-0008-5050-1539`
+
+---
+
+## Nota de alcance
+
+Este documento describe una visión arquitectónica y un blueprint técnico. No constituye por sí mismo asesoría legal, garantía de cumplimiento regulatorio, certificación de seguridad, patente concedida ni reconocimiento jurídico internacional. Cada afirmación de cumplimiento, evidencia, identidad, tokenización, biometría, sorteo o servicio financiero requiere implementación verificable y revisión profesional independiente.
