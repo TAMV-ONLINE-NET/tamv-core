@@ -58,9 +58,9 @@ TAMV usa dos mapas complementarios:
 
 ```text
 ┌───────────────────────────────────────────────────────────────┐
-│ CAPA 7 · Metacivilización, Archivo Histórico y Legado         │
+│ CAPA 7 · Metacivilización, Archivo Histórico y Legado        │
 ├───────────────────────────────────────────────────────────────┤
-│ CAPA 6 · Gobernanza, Consola Guardián, SACDAO y HITL          │
+│ CAPA 6 · Gobernanza, Consola Guardián, SACDAO y HITL         │
 ├───────────────────────────────────────────────────────────────┤
 │ CAPA 5 · Economía Ética, TAMV-T, FRI y protocolos antifraude  │
 ├───────────────────────────────────────────────────────────────┤
