@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArquitecturaRouteImport } from './routes/arquitectura'
+import { Route as EconomiaRouteImport } from './routes/economia'
 import { Route as IsabellaRouteImport } from './routes/isabella'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArquitecturaRoute = ArquitecturaRouteImport.update({
+  id: '/arquitectura',
+  path: '/arquitectura',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EconomiaRoute = EconomiaRouteImport.update({
+  id: '/economia',
+  path: '/economia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IsabellaRoute = IsabellaRouteImport.update({
@@ -25,27 +37,35 @@ const IsabellaRoute = IsabellaRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/arquitectura': typeof ArquitecturaRoute
+  '/economia': typeof EconomiaRoute
   '/isabella': typeof IsabellaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/arquitectura': typeof ArquitecturaRoute
+  '/economia': typeof EconomiaRoute
   '/isabella': typeof IsabellaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/arquitectura': typeof ArquitecturaRoute
+  '/economia': typeof EconomiaRoute
   '/isabella': typeof IsabellaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/isabella'
+  fullPaths: '/' | '/arquitectura' | '/economia' | '/isabella'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/isabella'
-  id: '__root__' | '/' | '/isabella'
+  to: '/' | '/arquitectura' | '/economia' | '/isabella'
+  id: '__root__' | '/' | '/arquitectura' | '/economia' | '/isabella'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArquitecturaRoute: typeof ArquitecturaRoute
+  EconomiaRoute: typeof EconomiaRoute
   IsabellaRoute: typeof IsabellaRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/arquitectura': {
+      id: '/arquitectura'
+      path: '/arquitectura'
+      fullPath: '/arquitectura'
+      preLoaderRoute: typeof ArquitecturaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/economia': {
+      id: '/economia'
+      path: '/economia'
+      fullPath: '/economia'
+      preLoaderRoute: typeof EconomiaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/isabella': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArquitecturaRoute: ArquitecturaRoute,
+  EconomiaRoute: EconomiaRoute,
   IsabellaRoute: IsabellaRoute,
 }
 export const routeTree = rootRouteImport
