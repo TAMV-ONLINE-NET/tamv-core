@@ -3,8 +3,9 @@
 FROM oven/bun:1.3.14-alpine AS build
 WORKDIR /app
 COPY package.json bun.lock bunfig.toml ./
-RUN bun install --frozen-lockfile
+RUN bun install
 COPY . .
+RUN bunx prisma generate
 RUN bun run build
 
 FROM oven/bun:1.3.14-alpine
@@ -14,6 +15,7 @@ ENV HOST=0.0.0.0
 ENV PORT=8000
 COPY --from=build /app/.output ./.output
 COPY --from=build /app/public ./public
+COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/package.json ./
 
 # Ejecutar como usuario no-root
