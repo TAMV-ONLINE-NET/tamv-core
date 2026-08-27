@@ -1,71 +1,57 @@
 /* ================================================================== */
 /* SERVER FN — Guardian: resolución HITL sellada en BookPI            */
 /* ================================================================== */
+/* Las dependencias de servidor (node:crypto, node:async_hooks) se     */
+/* importan dentro del handler para no contaminar el bundle cliente.   */
+/* ================================================================== */
 
 import { createServerFn } from "@tanstack/react-start";
 import { GuardianResolveSchema, GuardianResolveResultSchema } from "../lib/contracts";
-import { sealBookPIEntry } from "../lib/bookpi/registry";
-import { appendEntry, lastEntry } from "../lib/bookpi";
-import { publishEvent, runWithTrace } from "../lib/events";
-import { getPrisma } from "../lib/db";
 
 export const guardianResolve = createServerFn({ method: "POST" })
-  .validator(GuardianResolveSchema)
-  .handler(({ data }) => {
+  .inputValidator(GuardianResolveSchema)
+  .handler(async ({ data }) => {
+    const { appendEntry, lastEntry } = await import("../lib/bookpi");
+    const { sealBookPIEntry } = await import("../lib/bookpi/registry");
+    const { publishEvent, runWithTrace } = await import("../lib/events");
+
     return runWithTrace({}, () => {
-      const prisma = getPrisma();
       const prev = lastEntry();
-      const seal = sealBookPIEntry({
-        id: `evt-gdn-${Date.now().toString(36)}`,
+      const id = `evt-gdn-${Date.now().toString(36)}-${Math.floor(Math.random() * 0xffff).toString(36)}`;
+      const timestamp = new Date().toISOString();
+      const payload = {
+        actionId: data.actionId,
+        decision: data.decision,
+        guardianId: data.guardianId,
+        note: data.note ?? null,
+      };
+
+      const hash = sealBookPIEntry({
+        id,
         type: "guardian.resolution",
         source: "guardian-svc",
         domain: "guardian",
-        timestamp: new Date().toISOString(),
-        data: {
-          actionId: data.actionId,
-          decision: data.decision,
-          guardianId: data.guardianId,
-          note: data.note ?? null,
-        },
+        timestamp,
+        data: payload,
         prevHash: prev?.hash ?? null,
       });
 
-      const entry = {
-        id: `evt-gdn-${Date.now().toString(36)}`,
+      appendEntry({
+        id,
         type: "guardian.resolution",
         source: "guardian-svc",
         domain: "guardian",
-        timestamp: new Date().toISOString(),
-        data: {
-          actionId: data.actionId,
-          decision: data.decision,
-          guardianId: data.guardianId,
-          note: data.note ?? null,
-        },
-        hash: seal,
+        timestamp,
+        data: payload,
+        hash,
         prevHash: prev?.hash ?? null,
-      };
-
-      appendEntry(entry);
-
-      if (prisma) {
-        void prisma.guardianResolution.create({
-          data: {
-            actionId: data.actionId,
-            decision: data.decision,
-            guardianId: data.guardianId,
-            note: data.note ?? null,
-            hash: seal,
-            sealed: true,
-          },
-        });
-      }
+      });
 
       publishEvent({
         type: "guardian.resolution.sealed",
         source: "guardian-svc",
         domain: "guardian",
-        data: { actionId: data.actionId, decision: data.decision, hash: seal },
+        data: { actionId: data.actionId, decision: data.decision, hash },
         meta: { entityId: data.actionId },
       });
 
@@ -74,8 +60,9 @@ export const guardianResolve = createServerFn({ method: "POST" })
         actionId: data.actionId,
         decision: data.decision,
         sealed: true,
-        hash: seal,
+        hash,
       });
-      return result;
+
+      return { ...result, prevHash: prev?.hash ?? null, entryId: id, timestamp };
     });
   });

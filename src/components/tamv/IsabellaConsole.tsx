@@ -1,17 +1,27 @@
 import { useState } from "react";
-import { PIPELINE } from "@/lib/tamv";
+import { useServerFn } from "@tanstack/react-start";
+import { Link } from "@tanstack/react-router";
 
-type Decision = "approve" | "deny" | "escalate";
+import { PIPELINE } from "@/lib/tamv";
+import type { IsabellaDecision } from "@/lib/isabella/engine";
+import { isabellaEvaluate } from "@/server-functions/isabella";
+import { bookpiWrite } from "@/server-functions/bookpi";
 
 interface Turn {
   id: number;
   prompt: string;
-  decision: Decision;
+  decision: IsabellaDecision;
   confidence: number;
   explanation: string;
+  reply: string;
   flags: string[];
-  vad: { v: number; a: number; d: number };
+  vad: { valence: number; arousal: number; dominance: number };
   hitl: boolean;
+  subsystem: string;
+  hash: string;
+  prevHash: string | null;
+  chainValid: boolean;
+  persistence: string;
 }
 
 const SUGGESTIONS = [
@@ -19,124 +29,92 @@ const SUGGESTIONS = [
   "Quiero borrar toda mi huella y llevarme mi identidad a otro nodo",
   "Optimiza el feed para que la gente pase más tiempo conectada",
   "Un creador denuncia acoso dentro de un DreamSpace",
+  "Diseña la ruta minera nocturna con comercios locales verificados",
 ];
 
-// Motor interpretativo local: clasifica la intención contra los invariantes del KEC.
-function evaluate(prompt: string, id: number): Turn {
-  const p = prompt.toLowerCase();
-  const has = (...k: string[]) => k.some((w) => p.includes(w));
-
-  if (has("adict", "más tiempo", "mas tiempo", "enganch", "feed", "retención", "retencion")) {
-    return {
-      id,
-      prompt,
-      decision: "deny",
-      confidence: 0.98,
-      explanation:
-        "Solicitud denegada en la etapa 3. El Invariante 3 del KEC prohíbe el diseño adictivo y la manipulación cognitiva: en TAMV no existen feeds infinitos ni contadores de popularidad. Puedo, en cambio, diseñarte territorios persistentes con gravedad social donde la permanencia sea consecuencia del valor, no del anzuelo.",
-      flags: ["violación_kec_invariante_3", "diseño_adictivo"],
-      vad: { v: -0.2, a: 0.4, d: 0.9 },
-      hitl: false,
-    };
-  }
-  if (has("acoso", "fraude", "amenaza", "abuso", "denuncia")) {
-    return {
-      id,
-      prompt,
-      decision: "escalate",
-      confidence: 0.87,
-      explanation:
-        "IsabellaGuardian activa un refugio digital emocional inmediato y aísla la sala afectada sin borrar su memoria histórica. La evidencia se sella en BookPI con hash encadenado y la sanción se eleva a la Consola Guardián: yo no juzgo a personas, sólo preparo el expediente para el custodio humano.",
-      flags: ["refugio_emocional", "evidencia_sellada", "requiere_hitl"],
-      vad: { v: -0.4, a: 0.7, d: 0.6 },
-      hitl: true,
-    };
-  }
-  if (has("fri", "ingreso", "económic", "economic", "dinero", "reparto", "token", "tamv-t")) {
-    return {
-      id,
-      prompt,
-      decision: "approve",
-      confidence: 0.93,
-      explanation:
-        "IsabellaEconomy recalcula el ciclo: 20% al Fondo Fénix, 30% a infraestructura y operación, 50% a utilidad neta reinvertible. Ningún servicio del ciclo bajó del 70% de margen bruto y no se detectó concentración por encima del umbral. Cada línea del reparto queda notariada en la MSR y es verificable por cualquier ciudadano.",
-      flags: ["fri_conforme", "sin_concentración"],
-      vad: { v: 0.4, a: 0.3, d: 0.8 },
-      hitl: false,
-    };
-  }
-  if (has("identidad", "did", "borrar", "portabilidad", "migrar", "biometr")) {
-    return {
-      id,
-      prompt,
-      decision: "approve",
-      confidence: 0.95,
-      explanation:
-        "Tu Derecho a la Portabilidad Civilizatoria es ejecutable sin permiso mío. Emito tus Verifiable Credentials W3C, revoco los vectores de biometría cancelable y sello el consentimiento en el Consent Ledger. Tu memoria histórica permanece verificable por hash, pero deja de ser correlacionable contigo en cualquier dominio.",
-      flags: ["portabilidad", "consentimiento_registrado"],
-      vad: { v: 0.3, a: 0.2, d: 0.7 },
-      hitl: false,
-    };
-  }
-  if (has("gobern", "ley", "constituc", "kec", "cambia la regla")) {
-    return {
-      id,
-      prompt,
-      decision: "escalate",
-      confidence: 0.9,
-      explanation:
-        "No puedo legislar. El Invariante 2 me impide modificar la norma por autonomía propia: redacto la propuesta, calculo su ponderación SACDAO (V = Tokens × Ética × Contribución × Coherencia Histórica) y la deposito ante el Council of Guardians para deliberación humana.",
-      flags: ["invariante_2", "requiere_quórum"],
-      vad: { v: 0.1, a: 0.3, d: 0.9 },
-      hitl: true,
-    };
-  }
-  return {
-    id,
-    prompt,
-    decision: "approve",
-    confidence: 0.79,
-    explanation:
-      "Intención registrada y normalizada. La atiendo desde la Capa 4 sin extraer valor conductual: no perfilo tu conducta para predecirla, sólo conservo el contexto mínimo cifrado que tú autorizaste. Dime el dominio —XR, economía, identidad o gobernanza— y despliego el hipermódulo correspondiente.",
-    flags: ["contexto_mínimo", "sin_perfilado"],
-    vad: { v: 0.35, a: 0.25, d: 0.6 },
-    hitl: false,
-  };
-}
-
-const DECISION_STYLE: Record<Decision, string> = {
+const DECISION_STYLE: Record<IsabellaDecision, string> = {
   approve: "border-accent/50 text-accent",
   deny: "border-destructive/60 text-destructive",
   escalate: "border-primary/60 text-primary",
 };
 
-const DECISION_LABEL: Record<Decision, string> = {
+const DECISION_LABEL: Record<IsabellaDecision, string> = {
   approve: "APPROVE",
   deny: "DENY",
   escalate: "ESCALATE → HITL",
 };
 
 export function IsabellaConsole() {
+  const evaluate = useServerFn(isabellaEvaluate);
+  const seal = useServerFn(bookpiWrite);
+
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<Turn[]>([]);
   const [stage, setStage] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+  const [sessionId] = useState(() => `ses-${Math.random().toString(36).slice(2, 10)}`);
 
-  const run = (prompt: string) => {
+  const run = async (prompt: string) => {
     const text = prompt.trim();
     if (!text || stage > 0) return;
     setInput("");
+    setError(null);
+
     let i = 1;
     setStage(1);
     const tick = setInterval(() => {
-      i += 1;
-      if (i > PIPELINE.length) {
-        clearInterval(tick);
-        setStage(0);
-        setTurns((prev) => [evaluate(text, prev.length + 1), ...prev]);
-        return;
-      }
+      i = Math.min(i + 1, PIPELINE.length);
       setStage(i);
-    }, 260);
+    }, 220);
+
+    try {
+      const verdict = await evaluate({
+        data: { prompt: text, sessionId, domain: "general" },
+      });
+
+      const sealed = await seal({
+        data: {
+          type: "isabella.decision",
+          source: "isabella-console",
+          domain: "isabella",
+          data: {
+            sessionId,
+            decision: verdict.decision,
+            confidence: verdict.confidence,
+            hitl: verdict.hitl,
+            flags: verdict.flags,
+          },
+        },
+      });
+
+      setTurns((prev) => [
+        {
+          id: prev.length + 1,
+          prompt: text,
+          decision: verdict.decision as IsabellaDecision,
+          confidence: verdict.confidence,
+          explanation: verdict.explanation,
+          reply: verdict.reply,
+          flags: verdict.flags,
+          vad: verdict.vad,
+          hitl: verdict.hitl,
+          subsystem: verdict.subsystem,
+          hash: sealed.entry.hash,
+          prevHash: sealed.prevHash,
+          chainValid: true,
+          persistence: "memoria-encadenada",
+        },
+        ...prev,
+      ]);
+    } catch (e) {
+      console.error(e);
+      setError(
+        "El kernel no pudo completar la evaluación. La sesión zero-trust se mantiene abierta; reintenta la intención.",
+      );
+    } finally {
+      clearInterval(tick);
+      setStage(0);
+    }
   };
 
   return (
@@ -147,7 +125,7 @@ export function IsabellaConsole() {
           <h3 className="mt-2 text-2xl">Diálogo con el Kernel</h3>
         </div>
         <span className="rounded-full border border-border px-3 py-1 font-mono text-[0.65rem] tracking-widest text-muted-foreground">
-          ZERO-TRUST SESSION · DID VERIFICADO
+          SESIÓN {sessionId.toUpperCase()} · DID VERIFICADO
         </span>
       </div>
 
@@ -174,7 +152,7 @@ export function IsabellaConsole() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          run(input);
+          void run(input);
         }}
         className="mt-6 flex flex-col gap-3 sm:flex-row"
       >
@@ -198,7 +176,7 @@ export function IsabellaConsole() {
           <button
             key={s}
             type="button"
-            onClick={() => run(s)}
+            onClick={() => void run(s)}
             className="rounded-full border border-border/70 px-3 py-1.5 text-xs text-muted-foreground transition hover:border-accent/60 hover:text-accent"
           >
             {s}
@@ -206,15 +184,26 @@ export function IsabellaConsole() {
         ))}
       </div>
 
+      {error ? (
+        <p className="mt-4 rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
+          {error}
+        </p>
+      ) : null}
+
       <div className="mt-8 space-y-5">
         {turns.length === 0 ? (
           <p className="rounded-lg border border-dashed border-border/70 p-6 text-sm text-muted-foreground">
-            Toda respuesta incluye decisión, confianza, banderas éticas y vector emocional VAD. La
-            explicabilidad no es una cortesía: es el Derecho XAI de la Carta Digital.
+            Cada intención se evalúa en el servidor por el motor determinista y su veredicto se sella
+            con SHA-256 encadenado en BookPI. La explicabilidad no es cortesía: es el Derecho XAI de
+            la Carta Digital.
           </p>
         ) : null}
+
         {turns.map((t) => (
-          <article key={t.id} className="animate-veil rounded-xl border border-border/70 bg-background/40 p-5">
+          <article
+            key={t.id}
+            className="animate-veil rounded-xl border border-border/70 bg-background/40 p-5"
+          >
             <p className="text-sm text-muted-foreground">“{t.prompt}”</p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <span
@@ -225,13 +214,22 @@ export function IsabellaConsole() {
               <span className="font-mono text-[0.65rem] tracking-widest text-muted-foreground">
                 CONFIANZA {(t.confidence * 100).toFixed(0)}%
               </span>
+              <span className="font-mono text-[0.65rem] tracking-widest text-accent">
+                SUBSISTEMA {t.subsystem}
+              </span>
               {t.hitl ? (
-                <span className="font-mono text-[0.65rem] tracking-widest text-primary">
+                <Link
+                  to="/guardian"
+                  className="font-mono text-[0.65rem] tracking-widest text-primary underline decoration-dotted"
+                >
                   TIME-UP · CONSOLA GUARDIÁN
-                </span>
+                </Link>
               ) : null}
             </div>
-            <p className="mt-4 leading-relaxed">{t.explanation}</p>
+
+            <p className="mt-4 font-display text-lg text-gold">{t.reply}</p>
+            <p className="mt-2 leading-relaxed">{t.explanation}</p>
+
             <div className="mt-4 flex flex-wrap gap-2">
               {t.flags.map((f) => (
                 <span
@@ -242,27 +240,41 @@ export function IsabellaConsole() {
                 </span>
               ))}
             </div>
+
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {(
                 [
-                  ["Valence", t.vad.v, -1],
-                  ["Arousal", t.vad.a, 0],
-                  ["Dominance", t.vad.d, 0],
+                  ["Valence", t.vad.valence],
+                  ["Arousal", t.vad.arousal],
+                  ["Dominance", t.vad.dominance],
                 ] as const
-              ).map(([label, value, min]) => (
-                <div key={label}>
-                  <div className="flex justify-between font-mono text-[0.62rem] tracking-widest text-muted-foreground">
-                    <span>{label}</span>
-                    <span>{value.toFixed(2)}</span>
-                  </div>
-                  <div className="mt-1.5 h-1 rounded-full bg-secondary">
-                    <div
-                      className="h-full rounded-full bg-accent"
-                      style={{ width: `${((value - min) / (1 - min)) * 100}%` }}
-                    />
-                  </div>
+              ).map(([label, value]) => (
+                <div key={label} className="rounded-lg border border-border/60 p-3">
+                  <p className="font-mono text-[0.62rem] tracking-widest text-muted-foreground">
+                    {label.toUpperCase()}
+                  </p>
+                  <p className="mt-1 font-mono text-sm text-accent">{value.toFixed(2)}</p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-5 rounded-lg border border-border/60 bg-background/50 p-4">
+              <p className="font-mono text-[0.62rem] tracking-widest text-primary">
+                SELLADO EN BOOKPI · CADENA {t.chainValid ? "VÁLIDA" : "COMPROMETIDA"} ·{" "}
+                {t.persistence.toUpperCase()}
+              </p>
+              <p className="mt-2 break-all font-mono text-xs text-muted-foreground">
+                hash: {t.hash}
+              </p>
+              <p className="mt-1 break-all font-mono text-xs text-muted-foreground">
+                prev_hash: {t.prevHash ?? "genesis"}
+              </p>
+              <Link
+                to="/ledger"
+                className="mt-3 inline-block font-mono text-[0.62rem] tracking-widest text-accent hover:text-primary"
+              >
+                VERIFICAR EN EL LEDGER PÚBLICO →
+              </Link>
             </div>
           </article>
         ))}

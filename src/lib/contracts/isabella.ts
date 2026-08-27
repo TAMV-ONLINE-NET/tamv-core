@@ -30,6 +30,8 @@ export const IsabellaResponseSchema = z.object({
   vad: VAD_SCHEMA,
   hitl: z.boolean().describe("Requiere supervisión humana en el bucle"),
   pipelineStage: z.number().int().min(0).max(6),
+  subsystem: z.enum(["ISA", "SOPHIA", "ORION", "ARGUS", "CROWN"]).default("CROWN"),
+
 });
 
 export type IsabellaResponse = z.infer<typeof IsabellaResponseSchema>;
