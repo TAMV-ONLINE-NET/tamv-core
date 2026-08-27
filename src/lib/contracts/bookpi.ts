@@ -12,7 +12,7 @@ export const BookPIEntrySchema = z.object({
   timestamp: z.string().datetime({ offset: true }).describe("Marca ISO (UTC)"),
   hash: z.string().regex(/^[a-f0-9]{64}$/).describe("SHA-256 del cuerpo canónico"),
   prevHash: z.string().regex(/^[a-f0-9]{64}$/).nullable().describe("Hash del evento anterior (NULL para génesis)"),
-  data: z.record(z.string(), z.unknown()).describe("Payload JSON-serializable"),
+  data: z.record(z.string(), z.any()).describe("Payload JSON-serializable"),
 });
 
 export type BookPIEntry = z.infer<typeof BookPIEntrySchema>;
@@ -21,7 +21,7 @@ export const BookPIWriteRequestSchema = z.object({
   type: z.string().min(1).max(120),
   source: z.string().min(1).max(120),
   domain: z.string().min(1).max(80),
-  data: z.record(z.string(), z.unknown()),
+  data: z.record(z.string(), z.any()),
 });
 
 export type BookPIWriteRequest = z.infer<typeof BookPIWriteRequestSchema>;
