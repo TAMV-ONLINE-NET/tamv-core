@@ -14,6 +14,7 @@ import { Route as ArquitecturaRouteImport } from './routes/arquitectura'
 import { Route as EconomiaRouteImport } from './routes/economia'
 import { Route as GuardianRouteImport } from './routes/guardian'
 import { Route as IsabellaRouteImport } from './routes/isabella'
+import { Route as LedgerRouteImport } from './routes/ledger'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const IsabellaRoute = IsabellaRouteImport.update({
   path: '/isabella',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LedgerRoute = LedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/economia': typeof EconomiaRoute
   '/guardian': typeof GuardianRoute
   '/isabella': typeof IsabellaRoute
+  '/ledger': typeof LedgerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/economia': typeof EconomiaRoute
   '/guardian': typeof GuardianRoute
   '/isabella': typeof IsabellaRoute
+  '/ledger': typeof LedgerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,14 +70,23 @@ export interface FileRoutesById {
   '/economia': typeof EconomiaRoute
   '/guardian': typeof GuardianRoute
   '/isabella': typeof IsabellaRoute
+  '/ledger': typeof LedgerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella'
+  fullPaths:
+    '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella' | '/ledger'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella'
+  to:
+    '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella' | '/ledger'
   id:
-    '__root__' | '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella'
+    | '__root__'
+    | '/'
+    | '/arquitectura'
+    | '/economia'
+    | '/guardian'
+    | '/isabella'
+    | '/ledger'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -78,6 +95,7 @@ export interface RootRouteChildren {
   EconomiaRoute: typeof EconomiaRoute
   GuardianRoute: typeof GuardianRoute
   IsabellaRoute: typeof IsabellaRoute
+  LedgerRoute: typeof LedgerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -117,6 +135,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IsabellaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ledger': {
+      id: '/ledger'
+      path: '/ledger'
+      fullPath: '/ledger'
+      preLoaderRoute: typeof LedgerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -126,6 +151,7 @@ const rootRouteChildren: RootRouteChildren = {
   EconomiaRoute: EconomiaRoute,
   GuardianRoute: GuardianRoute,
   IsabellaRoute: IsabellaRoute,
+  LedgerRoute: LedgerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
