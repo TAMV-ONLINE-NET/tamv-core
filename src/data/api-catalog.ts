@@ -1,0 +1,6511 @@
+/* ================================================================== */
+/* CATÁLOGO DE APIS — Isabella Villaseñor AI (contract-draft v1)      */
+/* ================================================================== */
+/* Fuente: isabella-api-catalog-380-plus.json. Es un catálogo         */
+/* CONTRACTUAL versionado: ninguna ruta se considera implementada     */
+/* por aparecer aquí.                                                 */
+/* ================================================================== */
+
+export type ApiMethod = "GET" | "POST" | "PATCH" | "DELETE";
+
+export interface ApiCatalogEntry {
+  id: string;
+  method: ApiMethod;
+  path: string;
+  auth: string;
+  idempotency: boolean;
+  audit: boolean;
+  status: string;
+}
+
+export const API_CATALOG_SCHEMA = "isabella.api.catalog.v1";
+export const API_CATALOG_VERSION = "1.0.0";
+export const API_CATALOG_STATUS = "contract-draft";
+export const API_CATALOG_NOTES: string[] = [
+  "These are contract entries, not implemented endpoints.",
+  "Each route requires OpenAPI schemas, scopes, rate limits, error models and tests before production.",
+  "No endpoint is considered implemented from its presence in this catalog."
+];
+
+export const API_CATALOG: ApiCatalogEntry[] = [
+  {
+    "id": "identity.sessions.list",
+    "method": "GET",
+    "path": "/v1/identity/sessions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.sessions.get",
+    "method": "GET",
+    "path": "/v1/identity/sessions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.sessions.create",
+    "method": "POST",
+    "path": "/v1/identity/sessions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.sessions.action",
+    "method": "POST",
+    "path": "/v1/identity/sessions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.sessions.update",
+    "method": "PATCH",
+    "path": "/v1/identity/sessions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.sessions.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/sessions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.users.list",
+    "method": "GET",
+    "path": "/v1/identity/users",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.users.get",
+    "method": "GET",
+    "path": "/v1/identity/users/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.users.create",
+    "method": "POST",
+    "path": "/v1/identity/users",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.users.action",
+    "method": "POST",
+    "path": "/v1/identity/users/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.users.update",
+    "method": "PATCH",
+    "path": "/v1/identity/users/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.users.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/users/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.roles.list",
+    "method": "GET",
+    "path": "/v1/identity/roles",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.roles.get",
+    "method": "GET",
+    "path": "/v1/identity/roles/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.roles.create",
+    "method": "POST",
+    "path": "/v1/identity/roles",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.roles.action",
+    "method": "POST",
+    "path": "/v1/identity/roles/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.roles.update",
+    "method": "PATCH",
+    "path": "/v1/identity/roles/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.roles.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/roles/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.scopes.list",
+    "method": "GET",
+    "path": "/v1/identity/scopes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.scopes.get",
+    "method": "GET",
+    "path": "/v1/identity/scopes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.scopes.create",
+    "method": "POST",
+    "path": "/v1/identity/scopes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.scopes.action",
+    "method": "POST",
+    "path": "/v1/identity/scopes/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.scopes.update",
+    "method": "PATCH",
+    "path": "/v1/identity/scopes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.scopes.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/scopes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.tenants.list",
+    "method": "GET",
+    "path": "/v1/identity/tenants",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.tenants.get",
+    "method": "GET",
+    "path": "/v1/identity/tenants/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.tenants.create",
+    "method": "POST",
+    "path": "/v1/identity/tenants",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.tenants.action",
+    "method": "POST",
+    "path": "/v1/identity/tenants/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.tenants.update",
+    "method": "PATCH",
+    "path": "/v1/identity/tenants/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.tenants.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/tenants/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.consents.list",
+    "method": "GET",
+    "path": "/v1/identity/consents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.consents.get",
+    "method": "GET",
+    "path": "/v1/identity/consents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.consents.create",
+    "method": "POST",
+    "path": "/v1/identity/consents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.consents.action",
+    "method": "POST",
+    "path": "/v1/identity/consents/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.consents.update",
+    "method": "PATCH",
+    "path": "/v1/identity/consents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.consents.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/consents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.api-keys.list",
+    "method": "GET",
+    "path": "/v1/identity/api-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.api-keys.get",
+    "method": "GET",
+    "path": "/v1/identity/api-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.api-keys.create",
+    "method": "POST",
+    "path": "/v1/identity/api-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.api-keys.action",
+    "method": "POST",
+    "path": "/v1/identity/api-keys/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.api-keys.update",
+    "method": "PATCH",
+    "path": "/v1/identity/api-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.api-keys.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/api-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.devices.list",
+    "method": "GET",
+    "path": "/v1/identity/devices",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.devices.get",
+    "method": "GET",
+    "path": "/v1/identity/devices/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.devices.create",
+    "method": "POST",
+    "path": "/v1/identity/devices",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.devices.action",
+    "method": "POST",
+    "path": "/v1/identity/devices/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.devices.update",
+    "method": "PATCH",
+    "path": "/v1/identity/devices/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.devices.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/devices/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.service-accounts.list",
+    "method": "GET",
+    "path": "/v1/identity/service-accounts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.service-accounts.get",
+    "method": "GET",
+    "path": "/v1/identity/service-accounts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.service-accounts.create",
+    "method": "POST",
+    "path": "/v1/identity/service-accounts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.service-accounts.action",
+    "method": "POST",
+    "path": "/v1/identity/service-accounts/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.service-accounts.update",
+    "method": "PATCH",
+    "path": "/v1/identity/service-accounts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.service-accounts.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/service-accounts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.jwks.list",
+    "method": "GET",
+    "path": "/v1/identity/jwks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.jwks.get",
+    "method": "GET",
+    "path": "/v1/identity/jwks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "identity.jwks.create",
+    "method": "POST",
+    "path": "/v1/identity/jwks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.jwks.action",
+    "method": "POST",
+    "path": "/v1/identity/jwks/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.jwks.update",
+    "method": "PATCH",
+    "path": "/v1/identity/jwks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "identity.jwks.delete",
+    "method": "DELETE",
+    "path": "/v1/identity/jwks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.requests.list",
+    "method": "GET",
+    "path": "/v1/crown/requests",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.requests.get",
+    "method": "GET",
+    "path": "/v1/crown/requests/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.requests.create",
+    "method": "POST",
+    "path": "/v1/crown/requests",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.requests.action",
+    "method": "POST",
+    "path": "/v1/crown/requests/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.requests.update",
+    "method": "PATCH",
+    "path": "/v1/crown/requests/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.requests.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/requests/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.plans.list",
+    "method": "GET",
+    "path": "/v1/crown/plans",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.plans.get",
+    "method": "GET",
+    "path": "/v1/crown/plans/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.plans.create",
+    "method": "POST",
+    "path": "/v1/crown/plans",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.plans.action",
+    "method": "POST",
+    "path": "/v1/crown/plans/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.plans.update",
+    "method": "PATCH",
+    "path": "/v1/crown/plans/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.plans.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/plans/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.policies.list",
+    "method": "GET",
+    "path": "/v1/crown/policies",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.policies.get",
+    "method": "GET",
+    "path": "/v1/crown/policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.policies.create",
+    "method": "POST",
+    "path": "/v1/crown/policies",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.policies.action",
+    "method": "POST",
+    "path": "/v1/crown/policies/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.policies.update",
+    "method": "PATCH",
+    "path": "/v1/crown/policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.policies.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.decisions.list",
+    "method": "GET",
+    "path": "/v1/crown/decisions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.decisions.get",
+    "method": "GET",
+    "path": "/v1/crown/decisions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.decisions.create",
+    "method": "POST",
+    "path": "/v1/crown/decisions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.decisions.action",
+    "method": "POST",
+    "path": "/v1/crown/decisions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.decisions.update",
+    "method": "PATCH",
+    "path": "/v1/crown/decisions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.decisions.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/decisions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.approvals.list",
+    "method": "GET",
+    "path": "/v1/crown/approvals",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.approvals.get",
+    "method": "GET",
+    "path": "/v1/crown/approvals/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.approvals.create",
+    "method": "POST",
+    "path": "/v1/crown/approvals",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.approvals.action",
+    "method": "POST",
+    "path": "/v1/crown/approvals/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.approvals.update",
+    "method": "PATCH",
+    "path": "/v1/crown/approvals/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.approvals.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/approvals/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.replays.list",
+    "method": "GET",
+    "path": "/v1/crown/replays",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.replays.get",
+    "method": "GET",
+    "path": "/v1/crown/replays/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.replays.create",
+    "method": "POST",
+    "path": "/v1/crown/replays",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.replays.action",
+    "method": "POST",
+    "path": "/v1/crown/replays/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.replays.update",
+    "method": "PATCH",
+    "path": "/v1/crown/replays/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.replays.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/replays/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.budgets.list",
+    "method": "GET",
+    "path": "/v1/crown/budgets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.budgets.get",
+    "method": "GET",
+    "path": "/v1/crown/budgets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.budgets.create",
+    "method": "POST",
+    "path": "/v1/crown/budgets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.budgets.action",
+    "method": "POST",
+    "path": "/v1/crown/budgets/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.budgets.update",
+    "method": "PATCH",
+    "path": "/v1/crown/budgets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.budgets.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/budgets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.routing.list",
+    "method": "GET",
+    "path": "/v1/crown/routing",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.routing.get",
+    "method": "GET",
+    "path": "/v1/crown/routing/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.routing.create",
+    "method": "POST",
+    "path": "/v1/crown/routing",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.routing.action",
+    "method": "POST",
+    "path": "/v1/crown/routing/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.routing.update",
+    "method": "PATCH",
+    "path": "/v1/crown/routing/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.routing.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/routing/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.feature-flags.list",
+    "method": "GET",
+    "path": "/v1/crown/feature-flags",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.feature-flags.get",
+    "method": "GET",
+    "path": "/v1/crown/feature-flags/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.feature-flags.create",
+    "method": "POST",
+    "path": "/v1/crown/feature-flags",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.feature-flags.action",
+    "method": "POST",
+    "path": "/v1/crown/feature-flags/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.feature-flags.update",
+    "method": "PATCH",
+    "path": "/v1/crown/feature-flags/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.feature-flags.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/feature-flags/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.kill-switches.list",
+    "method": "GET",
+    "path": "/v1/crown/kill-switches",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.kill-switches.get",
+    "method": "GET",
+    "path": "/v1/crown/kill-switches/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "crown.kill-switches.create",
+    "method": "POST",
+    "path": "/v1/crown/kill-switches",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.kill-switches.action",
+    "method": "POST",
+    "path": "/v1/crown/kill-switches/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.kill-switches.update",
+    "method": "PATCH",
+    "path": "/v1/crown/kill-switches/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "crown.kill-switches.delete",
+    "method": "DELETE",
+    "path": "/v1/crown/kill-switches/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.heads.list",
+    "method": "GET",
+    "path": "/v1/heads/heads",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.heads.get",
+    "method": "GET",
+    "path": "/v1/heads/heads/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.heads.create",
+    "method": "POST",
+    "path": "/v1/heads/heads",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.heads.action",
+    "method": "POST",
+    "path": "/v1/heads/heads/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.heads.update",
+    "method": "PATCH",
+    "path": "/v1/heads/heads/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.heads.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/heads/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.cores.list",
+    "method": "GET",
+    "path": "/v1/heads/cores",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.cores.get",
+    "method": "GET",
+    "path": "/v1/heads/cores/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.cores.create",
+    "method": "POST",
+    "path": "/v1/heads/cores",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.cores.action",
+    "method": "POST",
+    "path": "/v1/heads/cores/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.cores.update",
+    "method": "PATCH",
+    "path": "/v1/heads/cores/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.cores.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/cores/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.proposals.list",
+    "method": "GET",
+    "path": "/v1/heads/proposals",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.proposals.get",
+    "method": "GET",
+    "path": "/v1/heads/proposals/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.proposals.create",
+    "method": "POST",
+    "path": "/v1/heads/proposals",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.proposals.action",
+    "method": "POST",
+    "path": "/v1/heads/proposals/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.proposals.update",
+    "method": "PATCH",
+    "path": "/v1/heads/proposals/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.proposals.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/proposals/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.verifications.list",
+    "method": "GET",
+    "path": "/v1/heads/verifications",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.verifications.get",
+    "method": "GET",
+    "path": "/v1/heads/verifications/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.verifications.create",
+    "method": "POST",
+    "path": "/v1/heads/verifications",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.verifications.action",
+    "method": "POST",
+    "path": "/v1/heads/verifications/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.verifications.update",
+    "method": "PATCH",
+    "path": "/v1/heads/verifications/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.verifications.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/verifications/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.health.list",
+    "method": "GET",
+    "path": "/v1/heads/health",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.health.get",
+    "method": "GET",
+    "path": "/v1/heads/health/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.health.create",
+    "method": "POST",
+    "path": "/v1/heads/health",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.health.action",
+    "method": "POST",
+    "path": "/v1/heads/health/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.health.update",
+    "method": "PATCH",
+    "path": "/v1/heads/health/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.health.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/health/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.metrics.list",
+    "method": "GET",
+    "path": "/v1/heads/metrics",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.metrics.get",
+    "method": "GET",
+    "path": "/v1/heads/metrics/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.metrics.create",
+    "method": "POST",
+    "path": "/v1/heads/metrics",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.metrics.action",
+    "method": "POST",
+    "path": "/v1/heads/metrics/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.metrics.update",
+    "method": "PATCH",
+    "path": "/v1/heads/metrics/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.metrics.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/metrics/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.promotions.list",
+    "method": "GET",
+    "path": "/v1/heads/promotions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.promotions.get",
+    "method": "GET",
+    "path": "/v1/heads/promotions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.promotions.create",
+    "method": "POST",
+    "path": "/v1/heads/promotions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.promotions.action",
+    "method": "POST",
+    "path": "/v1/heads/promotions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.promotions.update",
+    "method": "PATCH",
+    "path": "/v1/heads/promotions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.promotions.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/promotions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.rollbacks.list",
+    "method": "GET",
+    "path": "/v1/heads/rollbacks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.rollbacks.get",
+    "method": "GET",
+    "path": "/v1/heads/rollbacks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.rollbacks.create",
+    "method": "POST",
+    "path": "/v1/heads/rollbacks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.rollbacks.action",
+    "method": "POST",
+    "path": "/v1/heads/rollbacks/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.rollbacks.update",
+    "method": "PATCH",
+    "path": "/v1/heads/rollbacks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.rollbacks.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/rollbacks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.learning-runs.list",
+    "method": "GET",
+    "path": "/v1/heads/learning-runs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.learning-runs.get",
+    "method": "GET",
+    "path": "/v1/heads/learning-runs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.learning-runs.create",
+    "method": "POST",
+    "path": "/v1/heads/learning-runs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.learning-runs.action",
+    "method": "POST",
+    "path": "/v1/heads/learning-runs/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.learning-runs.update",
+    "method": "PATCH",
+    "path": "/v1/heads/learning-runs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.learning-runs.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/learning-runs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.evaluations.list",
+    "method": "GET",
+    "path": "/v1/heads/evaluations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.evaluations.get",
+    "method": "GET",
+    "path": "/v1/heads/evaluations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "heads.evaluations.create",
+    "method": "POST",
+    "path": "/v1/heads/evaluations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.evaluations.action",
+    "method": "POST",
+    "path": "/v1/heads/evaluations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.evaluations.update",
+    "method": "PATCH",
+    "path": "/v1/heads/evaluations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "heads.evaluations.delete",
+    "method": "DELETE",
+    "path": "/v1/heads/evaluations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.items.list",
+    "method": "GET",
+    "path": "/v1/memory/items",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.items.get",
+    "method": "GET",
+    "path": "/v1/memory/items/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.items.create",
+    "method": "POST",
+    "path": "/v1/memory/items",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.items.action",
+    "method": "POST",
+    "path": "/v1/memory/items/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.items.update",
+    "method": "PATCH",
+    "path": "/v1/memory/items/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.items.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/items/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.sessions.list",
+    "method": "GET",
+    "path": "/v1/memory/sessions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.sessions.get",
+    "method": "GET",
+    "path": "/v1/memory/sessions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.sessions.create",
+    "method": "POST",
+    "path": "/v1/memory/sessions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.sessions.action",
+    "method": "POST",
+    "path": "/v1/memory/sessions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.sessions.update",
+    "method": "PATCH",
+    "path": "/v1/memory/sessions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.sessions.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/sessions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.projects.list",
+    "method": "GET",
+    "path": "/v1/memory/projects",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.projects.get",
+    "method": "GET",
+    "path": "/v1/memory/projects/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.projects.create",
+    "method": "POST",
+    "path": "/v1/memory/projects",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.projects.action",
+    "method": "POST",
+    "path": "/v1/memory/projects/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.projects.update",
+    "method": "PATCH",
+    "path": "/v1/memory/projects/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.projects.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/projects/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.territorial.list",
+    "method": "GET",
+    "path": "/v1/memory/territorial",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.territorial.get",
+    "method": "GET",
+    "path": "/v1/memory/territorial/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.territorial.create",
+    "method": "POST",
+    "path": "/v1/memory/territorial",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.territorial.action",
+    "method": "POST",
+    "path": "/v1/memory/territorial/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.territorial.update",
+    "method": "PATCH",
+    "path": "/v1/memory/territorial/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.territorial.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/territorial/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.historical.list",
+    "method": "GET",
+    "path": "/v1/memory/historical",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.historical.get",
+    "method": "GET",
+    "path": "/v1/memory/historical/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.historical.create",
+    "method": "POST",
+    "path": "/v1/memory/historical",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.historical.action",
+    "method": "POST",
+    "path": "/v1/memory/historical/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.historical.update",
+    "method": "PATCH",
+    "path": "/v1/memory/historical/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.historical.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/historical/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.embeddings.list",
+    "method": "GET",
+    "path": "/v1/memory/embeddings",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.embeddings.get",
+    "method": "GET",
+    "path": "/v1/memory/embeddings/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.embeddings.create",
+    "method": "POST",
+    "path": "/v1/memory/embeddings",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.embeddings.action",
+    "method": "POST",
+    "path": "/v1/memory/embeddings/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.embeddings.update",
+    "method": "PATCH",
+    "path": "/v1/memory/embeddings/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.embeddings.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/embeddings/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.collections.list",
+    "method": "GET",
+    "path": "/v1/memory/collections",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.collections.get",
+    "method": "GET",
+    "path": "/v1/memory/collections/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.collections.create",
+    "method": "POST",
+    "path": "/v1/memory/collections",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.collections.action",
+    "method": "POST",
+    "path": "/v1/memory/collections/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.collections.update",
+    "method": "PATCH",
+    "path": "/v1/memory/collections/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.collections.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/collections/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.retention.list",
+    "method": "GET",
+    "path": "/v1/memory/retention",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.retention.get",
+    "method": "GET",
+    "path": "/v1/memory/retention/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.retention.create",
+    "method": "POST",
+    "path": "/v1/memory/retention",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.retention.action",
+    "method": "POST",
+    "path": "/v1/memory/retention/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.retention.update",
+    "method": "PATCH",
+    "path": "/v1/memory/retention/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.retention.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/retention/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.deletions.list",
+    "method": "GET",
+    "path": "/v1/memory/deletions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.deletions.get",
+    "method": "GET",
+    "path": "/v1/memory/deletions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.deletions.create",
+    "method": "POST",
+    "path": "/v1/memory/deletions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.deletions.action",
+    "method": "POST",
+    "path": "/v1/memory/deletions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.deletions.update",
+    "method": "PATCH",
+    "path": "/v1/memory/deletions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.deletions.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/deletions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.exports.list",
+    "method": "GET",
+    "path": "/v1/memory/exports",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.exports.get",
+    "method": "GET",
+    "path": "/v1/memory/exports/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "memory.exports.create",
+    "method": "POST",
+    "path": "/v1/memory/exports",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.exports.action",
+    "method": "POST",
+    "path": "/v1/memory/exports/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.exports.update",
+    "method": "PATCH",
+    "path": "/v1/memory/exports/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "memory.exports.delete",
+    "method": "DELETE",
+    "path": "/v1/memory/exports/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.sources.list",
+    "method": "GET",
+    "path": "/v1/evidence/sources",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.sources.get",
+    "method": "GET",
+    "path": "/v1/evidence/sources/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.sources.create",
+    "method": "POST",
+    "path": "/v1/evidence/sources",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.sources.action",
+    "method": "POST",
+    "path": "/v1/evidence/sources/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.sources.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/sources/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.sources.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/sources/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.claims.list",
+    "method": "GET",
+    "path": "/v1/evidence/claims",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.claims.get",
+    "method": "GET",
+    "path": "/v1/evidence/claims/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.claims.create",
+    "method": "POST",
+    "path": "/v1/evidence/claims",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.claims.action",
+    "method": "POST",
+    "path": "/v1/evidence/claims/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.claims.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/claims/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.claims.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/claims/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.citations.list",
+    "method": "GET",
+    "path": "/v1/evidence/citations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.citations.get",
+    "method": "GET",
+    "path": "/v1/evidence/citations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.citations.create",
+    "method": "POST",
+    "path": "/v1/evidence/citations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.citations.action",
+    "method": "POST",
+    "path": "/v1/evidence/citations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.citations.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/citations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.citations.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/citations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.datasets.list",
+    "method": "GET",
+    "path": "/v1/evidence/datasets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.datasets.get",
+    "method": "GET",
+    "path": "/v1/evidence/datasets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.datasets.create",
+    "method": "POST",
+    "path": "/v1/evidence/datasets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.datasets.action",
+    "method": "POST",
+    "path": "/v1/evidence/datasets/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.datasets.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/datasets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.datasets.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/datasets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.documents.list",
+    "method": "GET",
+    "path": "/v1/evidence/documents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.documents.get",
+    "method": "GET",
+    "path": "/v1/evidence/documents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.documents.create",
+    "method": "POST",
+    "path": "/v1/evidence/documents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.documents.action",
+    "method": "POST",
+    "path": "/v1/evidence/documents/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.documents.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/documents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.documents.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/documents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.hashes.list",
+    "method": "GET",
+    "path": "/v1/evidence/hashes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.hashes.get",
+    "method": "GET",
+    "path": "/v1/evidence/hashes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.hashes.create",
+    "method": "POST",
+    "path": "/v1/evidence/hashes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.hashes.action",
+    "method": "POST",
+    "path": "/v1/evidence/hashes/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.hashes.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/hashes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.hashes.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/hashes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.licenses.list",
+    "method": "GET",
+    "path": "/v1/evidence/licenses",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.licenses.get",
+    "method": "GET",
+    "path": "/v1/evidence/licenses/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.licenses.create",
+    "method": "POST",
+    "path": "/v1/evidence/licenses",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.licenses.action",
+    "method": "POST",
+    "path": "/v1/evidence/licenses/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.licenses.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/licenses/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.licenses.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/licenses/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.provenance.list",
+    "method": "GET",
+    "path": "/v1/evidence/provenance",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.provenance.get",
+    "method": "GET",
+    "path": "/v1/evidence/provenance/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.provenance.create",
+    "method": "POST",
+    "path": "/v1/evidence/provenance",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.provenance.action",
+    "method": "POST",
+    "path": "/v1/evidence/provenance/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.provenance.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/provenance/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.provenance.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/provenance/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.retractions.list",
+    "method": "GET",
+    "path": "/v1/evidence/retractions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.retractions.get",
+    "method": "GET",
+    "path": "/v1/evidence/retractions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.retractions.create",
+    "method": "POST",
+    "path": "/v1/evidence/retractions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.retractions.action",
+    "method": "POST",
+    "path": "/v1/evidence/retractions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.retractions.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/retractions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.retractions.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/retractions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.search.list",
+    "method": "GET",
+    "path": "/v1/evidence/search",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.search.get",
+    "method": "GET",
+    "path": "/v1/evidence/search/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.search.create",
+    "method": "POST",
+    "path": "/v1/evidence/search",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.search.action",
+    "method": "POST",
+    "path": "/v1/evidence/search/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.search.update",
+    "method": "PATCH",
+    "path": "/v1/evidence/search/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "evidence.search.delete",
+    "method": "DELETE",
+    "path": "/v1/evidence/search/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.skills.list",
+    "method": "GET",
+    "path": "/v1/praxis/skills",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.skills.get",
+    "method": "GET",
+    "path": "/v1/praxis/skills/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.skills.create",
+    "method": "POST",
+    "path": "/v1/praxis/skills",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.skills.action",
+    "method": "POST",
+    "path": "/v1/praxis/skills/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.skills.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/skills/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.skills.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/skills/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.manifests.list",
+    "method": "GET",
+    "path": "/v1/praxis/manifests",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.manifests.get",
+    "method": "GET",
+    "path": "/v1/praxis/manifests/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.manifests.create",
+    "method": "POST",
+    "path": "/v1/praxis/manifests",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.manifests.action",
+    "method": "POST",
+    "path": "/v1/praxis/manifests/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.manifests.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/manifests/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.manifests.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/manifests/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.executions.list",
+    "method": "GET",
+    "path": "/v1/praxis/executions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.executions.get",
+    "method": "GET",
+    "path": "/v1/praxis/executions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.executions.create",
+    "method": "POST",
+    "path": "/v1/praxis/executions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.executions.action",
+    "method": "POST",
+    "path": "/v1/praxis/executions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.executions.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/executions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.executions.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/executions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.sandboxes.list",
+    "method": "GET",
+    "path": "/v1/praxis/sandboxes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.sandboxes.get",
+    "method": "GET",
+    "path": "/v1/praxis/sandboxes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.sandboxes.create",
+    "method": "POST",
+    "path": "/v1/praxis/sandboxes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.sandboxes.action",
+    "method": "POST",
+    "path": "/v1/praxis/sandboxes/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.sandboxes.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/sandboxes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.sandboxes.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/sandboxes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.artifacts.list",
+    "method": "GET",
+    "path": "/v1/praxis/artifacts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.artifacts.get",
+    "method": "GET",
+    "path": "/v1/praxis/artifacts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.artifacts.create",
+    "method": "POST",
+    "path": "/v1/praxis/artifacts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.artifacts.action",
+    "method": "POST",
+    "path": "/v1/praxis/artifacts/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.artifacts.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/artifacts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.artifacts.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/artifacts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.permissions.list",
+    "method": "GET",
+    "path": "/v1/praxis/permissions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.permissions.get",
+    "method": "GET",
+    "path": "/v1/praxis/permissions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.permissions.create",
+    "method": "POST",
+    "path": "/v1/praxis/permissions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.permissions.action",
+    "method": "POST",
+    "path": "/v1/praxis/permissions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.permissions.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/permissions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.permissions.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/permissions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.secrets.list",
+    "method": "GET",
+    "path": "/v1/praxis/secrets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.secrets.get",
+    "method": "GET",
+    "path": "/v1/praxis/secrets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.secrets.create",
+    "method": "POST",
+    "path": "/v1/praxis/secrets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.secrets.action",
+    "method": "POST",
+    "path": "/v1/praxis/secrets/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.secrets.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/secrets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.secrets.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/secrets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.network-policies.list",
+    "method": "GET",
+    "path": "/v1/praxis/network-policies",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.network-policies.get",
+    "method": "GET",
+    "path": "/v1/praxis/network-policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.network-policies.create",
+    "method": "POST",
+    "path": "/v1/praxis/network-policies",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.network-policies.action",
+    "method": "POST",
+    "path": "/v1/praxis/network-policies/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.network-policies.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/network-policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.network-policies.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/network-policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.logs.list",
+    "method": "GET",
+    "path": "/v1/praxis/logs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.logs.get",
+    "method": "GET",
+    "path": "/v1/praxis/logs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.logs.create",
+    "method": "POST",
+    "path": "/v1/praxis/logs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.logs.action",
+    "method": "POST",
+    "path": "/v1/praxis/logs/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.logs.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/logs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.logs.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/logs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.cancellations.list",
+    "method": "GET",
+    "path": "/v1/praxis/cancellations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.cancellations.get",
+    "method": "GET",
+    "path": "/v1/praxis/cancellations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.cancellations.create",
+    "method": "POST",
+    "path": "/v1/praxis/cancellations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.cancellations.action",
+    "method": "POST",
+    "path": "/v1/praxis/cancellations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.cancellations.update",
+    "method": "PATCH",
+    "path": "/v1/praxis/cancellations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "praxis.cancellations.delete",
+    "method": "DELETE",
+    "path": "/v1/praxis/cancellations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.ledgers.list",
+    "method": "GET",
+    "path": "/v1/bookpi/ledgers",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.ledgers.get",
+    "method": "GET",
+    "path": "/v1/bookpi/ledgers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.ledgers.create",
+    "method": "POST",
+    "path": "/v1/bookpi/ledgers",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.ledgers.action",
+    "method": "POST",
+    "path": "/v1/bookpi/ledgers/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.ledgers.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/ledgers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.ledgers.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/ledgers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.events.list",
+    "method": "GET",
+    "path": "/v1/bookpi/events",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.events.get",
+    "method": "GET",
+    "path": "/v1/bookpi/events/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.events.create",
+    "method": "POST",
+    "path": "/v1/bookpi/events",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.events.action",
+    "method": "POST",
+    "path": "/v1/bookpi/events/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.events.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/events/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.events.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/events/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.blocks.list",
+    "method": "GET",
+    "path": "/v1/bookpi/blocks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.blocks.get",
+    "method": "GET",
+    "path": "/v1/bookpi/blocks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.blocks.create",
+    "method": "POST",
+    "path": "/v1/bookpi/blocks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.blocks.action",
+    "method": "POST",
+    "path": "/v1/bookpi/blocks/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.blocks.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/blocks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.blocks.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/blocks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.anchors.list",
+    "method": "GET",
+    "path": "/v1/bookpi/anchors",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.anchors.get",
+    "method": "GET",
+    "path": "/v1/bookpi/anchors/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.anchors.create",
+    "method": "POST",
+    "path": "/v1/bookpi/anchors",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.anchors.action",
+    "method": "POST",
+    "path": "/v1/bookpi/anchors/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.anchors.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/anchors/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.anchors.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/anchors/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.proofs.list",
+    "method": "GET",
+    "path": "/v1/bookpi/proofs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.proofs.get",
+    "method": "GET",
+    "path": "/v1/bookpi/proofs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.proofs.create",
+    "method": "POST",
+    "path": "/v1/bookpi/proofs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.proofs.action",
+    "method": "POST",
+    "path": "/v1/bookpi/proofs/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.proofs.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/proofs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.proofs.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/proofs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.signatures.list",
+    "method": "GET",
+    "path": "/v1/bookpi/signatures",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.signatures.get",
+    "method": "GET",
+    "path": "/v1/bookpi/signatures/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.signatures.create",
+    "method": "POST",
+    "path": "/v1/bookpi/signatures",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.signatures.action",
+    "method": "POST",
+    "path": "/v1/bookpi/signatures/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.signatures.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/signatures/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.signatures.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/signatures/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.audit-exports.list",
+    "method": "GET",
+    "path": "/v1/bookpi/audit-exports",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.audit-exports.get",
+    "method": "GET",
+    "path": "/v1/bookpi/audit-exports/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.audit-exports.create",
+    "method": "POST",
+    "path": "/v1/bookpi/audit-exports",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.audit-exports.action",
+    "method": "POST",
+    "path": "/v1/bookpi/audit-exports/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.audit-exports.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/audit-exports/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.audit-exports.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/audit-exports/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.integrity.list",
+    "method": "GET",
+    "path": "/v1/bookpi/integrity",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.integrity.get",
+    "method": "GET",
+    "path": "/v1/bookpi/integrity/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.integrity.create",
+    "method": "POST",
+    "path": "/v1/bookpi/integrity",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.integrity.action",
+    "method": "POST",
+    "path": "/v1/bookpi/integrity/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.integrity.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/integrity/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.integrity.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/integrity/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.reconciliation.list",
+    "method": "GET",
+    "path": "/v1/bookpi/reconciliation",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.reconciliation.get",
+    "method": "GET",
+    "path": "/v1/bookpi/reconciliation/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.reconciliation.create",
+    "method": "POST",
+    "path": "/v1/bookpi/reconciliation",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.reconciliation.action",
+    "method": "POST",
+    "path": "/v1/bookpi/reconciliation/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.reconciliation.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/reconciliation/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.reconciliation.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/reconciliation/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.outbox.list",
+    "method": "GET",
+    "path": "/v1/bookpi/outbox",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.outbox.get",
+    "method": "GET",
+    "path": "/v1/bookpi/outbox/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.outbox.create",
+    "method": "POST",
+    "path": "/v1/bookpi/outbox",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.outbox.action",
+    "method": "POST",
+    "path": "/v1/bookpi/outbox/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.outbox.update",
+    "method": "PATCH",
+    "path": "/v1/bookpi/outbox/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "bookpi.outbox.delete",
+    "method": "DELETE",
+    "path": "/v1/bookpi/outbox/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.federations.list",
+    "method": "GET",
+    "path": "/v1/topology/federations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.federations.get",
+    "method": "GET",
+    "path": "/v1/topology/federations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.federations.create",
+    "method": "POST",
+    "path": "/v1/topology/federations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.federations.action",
+    "method": "POST",
+    "path": "/v1/topology/federations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.federations.update",
+    "method": "PATCH",
+    "path": "/v1/topology/federations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.federations.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/federations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.nodes.list",
+    "method": "GET",
+    "path": "/v1/topology/nodes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.nodes.get",
+    "method": "GET",
+    "path": "/v1/topology/nodes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.nodes.create",
+    "method": "POST",
+    "path": "/v1/topology/nodes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.nodes.action",
+    "method": "POST",
+    "path": "/v1/topology/nodes/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.nodes.update",
+    "method": "PATCH",
+    "path": "/v1/topology/nodes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.nodes.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/nodes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.links.list",
+    "method": "GET",
+    "path": "/v1/topology/links",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.links.get",
+    "method": "GET",
+    "path": "/v1/topology/links/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.links.create",
+    "method": "POST",
+    "path": "/v1/topology/links",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.links.action",
+    "method": "POST",
+    "path": "/v1/topology/links/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.links.update",
+    "method": "PATCH",
+    "path": "/v1/topology/links/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.links.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/links/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.telemetry.list",
+    "method": "GET",
+    "path": "/v1/topology/telemetry",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.telemetry.get",
+    "method": "GET",
+    "path": "/v1/topology/telemetry/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.telemetry.create",
+    "method": "POST",
+    "path": "/v1/topology/telemetry",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.telemetry.action",
+    "method": "POST",
+    "path": "/v1/topology/telemetry/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.telemetry.update",
+    "method": "PATCH",
+    "path": "/v1/topology/telemetry/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.telemetry.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/telemetry/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.incidents.list",
+    "method": "GET",
+    "path": "/v1/topology/incidents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.incidents.get",
+    "method": "GET",
+    "path": "/v1/topology/incidents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.incidents.create",
+    "method": "POST",
+    "path": "/v1/topology/incidents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.incidents.action",
+    "method": "POST",
+    "path": "/v1/topology/incidents/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.incidents.update",
+    "method": "PATCH",
+    "path": "/v1/topology/incidents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.incidents.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/incidents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.routes.list",
+    "method": "GET",
+    "path": "/v1/topology/routes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.routes.get",
+    "method": "GET",
+    "path": "/v1/topology/routes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.routes.create",
+    "method": "POST",
+    "path": "/v1/topology/routes",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.routes.action",
+    "method": "POST",
+    "path": "/v1/topology/routes/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.routes.update",
+    "method": "PATCH",
+    "path": "/v1/topology/routes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.routes.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/routes/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.firmware.list",
+    "method": "GET",
+    "path": "/v1/topology/firmware",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.firmware.get",
+    "method": "GET",
+    "path": "/v1/topology/firmware/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.firmware.create",
+    "method": "POST",
+    "path": "/v1/topology/firmware",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.firmware.action",
+    "method": "POST",
+    "path": "/v1/topology/firmware/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.firmware.update",
+    "method": "PATCH",
+    "path": "/v1/topology/firmware/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.firmware.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/firmware/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.attestations.list",
+    "method": "GET",
+    "path": "/v1/topology/attestations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.attestations.get",
+    "method": "GET",
+    "path": "/v1/topology/attestations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.attestations.create",
+    "method": "POST",
+    "path": "/v1/topology/attestations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.attestations.action",
+    "method": "POST",
+    "path": "/v1/topology/attestations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.attestations.update",
+    "method": "PATCH",
+    "path": "/v1/topology/attestations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.attestations.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/attestations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.mesh-keys.list",
+    "method": "GET",
+    "path": "/v1/topology/mesh-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.mesh-keys.get",
+    "method": "GET",
+    "path": "/v1/topology/mesh-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.mesh-keys.create",
+    "method": "POST",
+    "path": "/v1/topology/mesh-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.mesh-keys.action",
+    "method": "POST",
+    "path": "/v1/topology/mesh-keys/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.mesh-keys.update",
+    "method": "PATCH",
+    "path": "/v1/topology/mesh-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.mesh-keys.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/mesh-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.sync.list",
+    "method": "GET",
+    "path": "/v1/topology/sync",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.sync.get",
+    "method": "GET",
+    "path": "/v1/topology/sync/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "topology.sync.create",
+    "method": "POST",
+    "path": "/v1/topology/sync",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.sync.action",
+    "method": "POST",
+    "path": "/v1/topology/sync/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.sync.update",
+    "method": "PATCH",
+    "path": "/v1/topology/sync/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "topology.sync.delete",
+    "method": "DELETE",
+    "path": "/v1/topology/sync/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.jobs.list",
+    "method": "GET",
+    "path": "/v1/quantum/jobs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.jobs.get",
+    "method": "GET",
+    "path": "/v1/quantum/jobs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.jobs.create",
+    "method": "POST",
+    "path": "/v1/quantum/jobs",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.jobs.action",
+    "method": "POST",
+    "path": "/v1/quantum/jobs/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.jobs.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/jobs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.jobs.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/jobs/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.circuits.list",
+    "method": "GET",
+    "path": "/v1/quantum/circuits",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.circuits.get",
+    "method": "GET",
+    "path": "/v1/quantum/circuits/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.circuits.create",
+    "method": "POST",
+    "path": "/v1/quantum/circuits",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.circuits.action",
+    "method": "POST",
+    "path": "/v1/quantum/circuits/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.circuits.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/circuits/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.circuits.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/circuits/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.providers.list",
+    "method": "GET",
+    "path": "/v1/quantum/providers",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.providers.get",
+    "method": "GET",
+    "path": "/v1/quantum/providers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.providers.create",
+    "method": "POST",
+    "path": "/v1/quantum/providers",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.providers.action",
+    "method": "POST",
+    "path": "/v1/quantum/providers/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.providers.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/providers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.providers.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/providers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.backends.list",
+    "method": "GET",
+    "path": "/v1/quantum/backends",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.backends.get",
+    "method": "GET",
+    "path": "/v1/quantum/backends/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.backends.create",
+    "method": "POST",
+    "path": "/v1/quantum/backends",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.backends.action",
+    "method": "POST",
+    "path": "/v1/quantum/backends/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.backends.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/backends/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.backends.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/backends/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.budgets.list",
+    "method": "GET",
+    "path": "/v1/quantum/budgets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.budgets.get",
+    "method": "GET",
+    "path": "/v1/quantum/budgets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.budgets.create",
+    "method": "POST",
+    "path": "/v1/quantum/budgets",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.budgets.action",
+    "method": "POST",
+    "path": "/v1/quantum/budgets/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.budgets.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/budgets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.budgets.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/budgets/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.results.list",
+    "method": "GET",
+    "path": "/v1/quantum/results",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.results.get",
+    "method": "GET",
+    "path": "/v1/quantum/results/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.results.create",
+    "method": "POST",
+    "path": "/v1/quantum/results",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.results.action",
+    "method": "POST",
+    "path": "/v1/quantum/results/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.results.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/results/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.results.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/results/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.artifacts.list",
+    "method": "GET",
+    "path": "/v1/quantum/artifacts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.artifacts.get",
+    "method": "GET",
+    "path": "/v1/quantum/artifacts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.artifacts.create",
+    "method": "POST",
+    "path": "/v1/quantum/artifacts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.artifacts.action",
+    "method": "POST",
+    "path": "/v1/quantum/artifacts/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.artifacts.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/artifacts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.artifacts.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/artifacts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.replays.list",
+    "method": "GET",
+    "path": "/v1/quantum/replays",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.replays.get",
+    "method": "GET",
+    "path": "/v1/quantum/replays/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.replays.create",
+    "method": "POST",
+    "path": "/v1/quantum/replays",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.replays.action",
+    "method": "POST",
+    "path": "/v1/quantum/replays/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.replays.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/replays/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.replays.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/replays/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.queues.list",
+    "method": "GET",
+    "path": "/v1/quantum/queues",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.queues.get",
+    "method": "GET",
+    "path": "/v1/quantum/queues/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.queues.create",
+    "method": "POST",
+    "path": "/v1/quantum/queues",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.queues.action",
+    "method": "POST",
+    "path": "/v1/quantum/queues/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.queues.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/queues/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.queues.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/queues/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.calibration.list",
+    "method": "GET",
+    "path": "/v1/quantum/calibration",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.calibration.get",
+    "method": "GET",
+    "path": "/v1/quantum/calibration/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.calibration.create",
+    "method": "POST",
+    "path": "/v1/quantum/calibration",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.calibration.action",
+    "method": "POST",
+    "path": "/v1/quantum/calibration/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.calibration.update",
+    "method": "PATCH",
+    "path": "/v1/quantum/calibration/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "quantum.calibration.delete",
+    "method": "DELETE",
+    "path": "/v1/quantum/calibration/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.profiles.list",
+    "method": "GET",
+    "path": "/v1/pqc/profiles",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.profiles.get",
+    "method": "GET",
+    "path": "/v1/pqc/profiles/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.profiles.create",
+    "method": "POST",
+    "path": "/v1/pqc/profiles",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.profiles.action",
+    "method": "POST",
+    "path": "/v1/pqc/profiles/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.profiles.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/profiles/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.profiles.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/profiles/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.kem-keys.list",
+    "method": "GET",
+    "path": "/v1/pqc/kem-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.kem-keys.get",
+    "method": "GET",
+    "path": "/v1/pqc/kem-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.kem-keys.create",
+    "method": "POST",
+    "path": "/v1/pqc/kem-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.kem-keys.action",
+    "method": "POST",
+    "path": "/v1/pqc/kem-keys/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.kem-keys.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/kem-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.kem-keys.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/kem-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.signing-keys.list",
+    "method": "GET",
+    "path": "/v1/pqc/signing-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.signing-keys.get",
+    "method": "GET",
+    "path": "/v1/pqc/signing-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.signing-keys.create",
+    "method": "POST",
+    "path": "/v1/pqc/signing-keys",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.signing-keys.action",
+    "method": "POST",
+    "path": "/v1/pqc/signing-keys/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.signing-keys.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/signing-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.signing-keys.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/signing-keys/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.certificates.list",
+    "method": "GET",
+    "path": "/v1/pqc/certificates",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.certificates.get",
+    "method": "GET",
+    "path": "/v1/pqc/certificates/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.certificates.create",
+    "method": "POST",
+    "path": "/v1/pqc/certificates",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.certificates.action",
+    "method": "POST",
+    "path": "/v1/pqc/certificates/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.certificates.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/certificates/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.certificates.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/certificates/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.rotations.list",
+    "method": "GET",
+    "path": "/v1/pqc/rotations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.rotations.get",
+    "method": "GET",
+    "path": "/v1/pqc/rotations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.rotations.create",
+    "method": "POST",
+    "path": "/v1/pqc/rotations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.rotations.action",
+    "method": "POST",
+    "path": "/v1/pqc/rotations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.rotations.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/rotations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.rotations.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/rotations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.revocations.list",
+    "method": "GET",
+    "path": "/v1/pqc/revocations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.revocations.get",
+    "method": "GET",
+    "path": "/v1/pqc/revocations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.revocations.create",
+    "method": "POST",
+    "path": "/v1/pqc/revocations",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.revocations.action",
+    "method": "POST",
+    "path": "/v1/pqc/revocations/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.revocations.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/revocations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.revocations.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/revocations/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.test-vectors.list",
+    "method": "GET",
+    "path": "/v1/pqc/test-vectors",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.test-vectors.get",
+    "method": "GET",
+    "path": "/v1/pqc/test-vectors/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.test-vectors.create",
+    "method": "POST",
+    "path": "/v1/pqc/test-vectors",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.test-vectors.action",
+    "method": "POST",
+    "path": "/v1/pqc/test-vectors/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.test-vectors.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/test-vectors/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.test-vectors.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/test-vectors/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.benchmarks.list",
+    "method": "GET",
+    "path": "/v1/pqc/benchmarks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.benchmarks.get",
+    "method": "GET",
+    "path": "/v1/pqc/benchmarks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.benchmarks.create",
+    "method": "POST",
+    "path": "/v1/pqc/benchmarks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.benchmarks.action",
+    "method": "POST",
+    "path": "/v1/pqc/benchmarks/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.benchmarks.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/benchmarks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.benchmarks.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/benchmarks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.policies.list",
+    "method": "GET",
+    "path": "/v1/pqc/policies",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.policies.get",
+    "method": "GET",
+    "path": "/v1/pqc/policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.policies.create",
+    "method": "POST",
+    "path": "/v1/pqc/policies",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.policies.action",
+    "method": "POST",
+    "path": "/v1/pqc/policies/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.policies.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.policies.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/policies/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.hsm.list",
+    "method": "GET",
+    "path": "/v1/pqc/hsm",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.hsm.get",
+    "method": "GET",
+    "path": "/v1/pqc/hsm/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.hsm.create",
+    "method": "POST",
+    "path": "/v1/pqc/hsm",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.hsm.action",
+    "method": "POST",
+    "path": "/v1/pqc/hsm/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.hsm.update",
+    "method": "PATCH",
+    "path": "/v1/pqc/hsm/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "pqc.hsm.delete",
+    "method": "DELETE",
+    "path": "/v1/pqc/hsm/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.customers.list",
+    "method": "GET",
+    "path": "/v1/billing/customers",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.customers.get",
+    "method": "GET",
+    "path": "/v1/billing/customers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.customers.create",
+    "method": "POST",
+    "path": "/v1/billing/customers",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.customers.action",
+    "method": "POST",
+    "path": "/v1/billing/customers/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.customers.update",
+    "method": "PATCH",
+    "path": "/v1/billing/customers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.customers.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/customers/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.subscriptions.list",
+    "method": "GET",
+    "path": "/v1/billing/subscriptions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.subscriptions.get",
+    "method": "GET",
+    "path": "/v1/billing/subscriptions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.subscriptions.create",
+    "method": "POST",
+    "path": "/v1/billing/subscriptions",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.subscriptions.action",
+    "method": "POST",
+    "path": "/v1/billing/subscriptions/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.subscriptions.update",
+    "method": "PATCH",
+    "path": "/v1/billing/subscriptions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.subscriptions.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/subscriptions/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.invoices.list",
+    "method": "GET",
+    "path": "/v1/billing/invoices",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.invoices.get",
+    "method": "GET",
+    "path": "/v1/billing/invoices/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.invoices.create",
+    "method": "POST",
+    "path": "/v1/billing/invoices",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.invoices.action",
+    "method": "POST",
+    "path": "/v1/billing/invoices/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.invoices.update",
+    "method": "PATCH",
+    "path": "/v1/billing/invoices/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.invoices.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/invoices/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.usage.list",
+    "method": "GET",
+    "path": "/v1/billing/usage",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.usage.get",
+    "method": "GET",
+    "path": "/v1/billing/usage/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.usage.create",
+    "method": "POST",
+    "path": "/v1/billing/usage",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.usage.action",
+    "method": "POST",
+    "path": "/v1/billing/usage/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.usage.update",
+    "method": "PATCH",
+    "path": "/v1/billing/usage/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.usage.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/usage/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.credits.list",
+    "method": "GET",
+    "path": "/v1/billing/credits",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.credits.get",
+    "method": "GET",
+    "path": "/v1/billing/credits/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.credits.create",
+    "method": "POST",
+    "path": "/v1/billing/credits",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.credits.action",
+    "method": "POST",
+    "path": "/v1/billing/credits/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.credits.update",
+    "method": "PATCH",
+    "path": "/v1/billing/credits/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.credits.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/credits/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.payouts.list",
+    "method": "GET",
+    "path": "/v1/billing/payouts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.payouts.get",
+    "method": "GET",
+    "path": "/v1/billing/payouts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.payouts.create",
+    "method": "POST",
+    "path": "/v1/billing/payouts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.payouts.action",
+    "method": "POST",
+    "path": "/v1/billing/payouts/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.payouts.update",
+    "method": "PATCH",
+    "path": "/v1/billing/payouts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.payouts.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/payouts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.webhooks.list",
+    "method": "GET",
+    "path": "/v1/billing/webhooks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.webhooks.get",
+    "method": "GET",
+    "path": "/v1/billing/webhooks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.webhooks.create",
+    "method": "POST",
+    "path": "/v1/billing/webhooks",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.webhooks.action",
+    "method": "POST",
+    "path": "/v1/billing/webhooks/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.webhooks.update",
+    "method": "PATCH",
+    "path": "/v1/billing/webhooks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.webhooks.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/webhooks/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.plans.list",
+    "method": "GET",
+    "path": "/v1/billing/plans",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.plans.get",
+    "method": "GET",
+    "path": "/v1/billing/plans/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.plans.create",
+    "method": "POST",
+    "path": "/v1/billing/plans",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.plans.action",
+    "method": "POST",
+    "path": "/v1/billing/plans/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.plans.update",
+    "method": "PATCH",
+    "path": "/v1/billing/plans/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.plans.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/plans/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.entitlements.list",
+    "method": "GET",
+    "path": "/v1/billing/entitlements",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.entitlements.get",
+    "method": "GET",
+    "path": "/v1/billing/entitlements/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.entitlements.create",
+    "method": "POST",
+    "path": "/v1/billing/entitlements",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.entitlements.action",
+    "method": "POST",
+    "path": "/v1/billing/entitlements/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.entitlements.update",
+    "method": "PATCH",
+    "path": "/v1/billing/entitlements/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.entitlements.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/entitlements/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.tax.list",
+    "method": "GET",
+    "path": "/v1/billing/tax",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.tax.get",
+    "method": "GET",
+    "path": "/v1/billing/tax/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "billing.tax.create",
+    "method": "POST",
+    "path": "/v1/billing/tax",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.tax.action",
+    "method": "POST",
+    "path": "/v1/billing/tax/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.tax.update",
+    "method": "PATCH",
+    "path": "/v1/billing/tax/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "billing.tax.delete",
+    "method": "DELETE",
+    "path": "/v1/billing/tax/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.health.list",
+    "method": "GET",
+    "path": "/v1/ops/health",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.health.get",
+    "method": "GET",
+    "path": "/v1/ops/health/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.health.create",
+    "method": "POST",
+    "path": "/v1/ops/health",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.health.action",
+    "method": "POST",
+    "path": "/v1/ops/health/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.health.update",
+    "method": "PATCH",
+    "path": "/v1/ops/health/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.health.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/health/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.readiness.list",
+    "method": "GET",
+    "path": "/v1/ops/readiness",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.readiness.get",
+    "method": "GET",
+    "path": "/v1/ops/readiness/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.readiness.create",
+    "method": "POST",
+    "path": "/v1/ops/readiness",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.readiness.action",
+    "method": "POST",
+    "path": "/v1/ops/readiness/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.readiness.update",
+    "method": "PATCH",
+    "path": "/v1/ops/readiness/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.readiness.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/readiness/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.deployments.list",
+    "method": "GET",
+    "path": "/v1/ops/deployments",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.deployments.get",
+    "method": "GET",
+    "path": "/v1/ops/deployments/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.deployments.create",
+    "method": "POST",
+    "path": "/v1/ops/deployments",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.deployments.action",
+    "method": "POST",
+    "path": "/v1/ops/deployments/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.deployments.update",
+    "method": "PATCH",
+    "path": "/v1/ops/deployments/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.deployments.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/deployments/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.releases.list",
+    "method": "GET",
+    "path": "/v1/ops/releases",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.releases.get",
+    "method": "GET",
+    "path": "/v1/ops/releases/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.releases.create",
+    "method": "POST",
+    "path": "/v1/ops/releases",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.releases.action",
+    "method": "POST",
+    "path": "/v1/ops/releases/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.releases.update",
+    "method": "PATCH",
+    "path": "/v1/ops/releases/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.releases.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/releases/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.canaries.list",
+    "method": "GET",
+    "path": "/v1/ops/canaries",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.canaries.get",
+    "method": "GET",
+    "path": "/v1/ops/canaries/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.canaries.create",
+    "method": "POST",
+    "path": "/v1/ops/canaries",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.canaries.action",
+    "method": "POST",
+    "path": "/v1/ops/canaries/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.canaries.update",
+    "method": "PATCH",
+    "path": "/v1/ops/canaries/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.canaries.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/canaries/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.traces.list",
+    "method": "GET",
+    "path": "/v1/ops/traces",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.traces.get",
+    "method": "GET",
+    "path": "/v1/ops/traces/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.traces.create",
+    "method": "POST",
+    "path": "/v1/ops/traces",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.traces.action",
+    "method": "POST",
+    "path": "/v1/ops/traces/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.traces.update",
+    "method": "PATCH",
+    "path": "/v1/ops/traces/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.traces.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/traces/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.metrics.list",
+    "method": "GET",
+    "path": "/v1/ops/metrics",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.metrics.get",
+    "method": "GET",
+    "path": "/v1/ops/metrics/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.metrics.create",
+    "method": "POST",
+    "path": "/v1/ops/metrics",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.metrics.action",
+    "method": "POST",
+    "path": "/v1/ops/metrics/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.metrics.update",
+    "method": "PATCH",
+    "path": "/v1/ops/metrics/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.metrics.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/metrics/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.alerts.list",
+    "method": "GET",
+    "path": "/v1/ops/alerts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.alerts.get",
+    "method": "GET",
+    "path": "/v1/ops/alerts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.alerts.create",
+    "method": "POST",
+    "path": "/v1/ops/alerts",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.alerts.action",
+    "method": "POST",
+    "path": "/v1/ops/alerts/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.alerts.update",
+    "method": "PATCH",
+    "path": "/v1/ops/alerts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.alerts.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/alerts/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.backups.list",
+    "method": "GET",
+    "path": "/v1/ops/backups",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.backups.get",
+    "method": "GET",
+    "path": "/v1/ops/backups/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.backups.create",
+    "method": "POST",
+    "path": "/v1/ops/backups",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.backups.action",
+    "method": "POST",
+    "path": "/v1/ops/backups/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.backups.update",
+    "method": "PATCH",
+    "path": "/v1/ops/backups/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.backups.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/backups/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.incidents.list",
+    "method": "GET",
+    "path": "/v1/ops/incidents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.incidents.get",
+    "method": "GET",
+    "path": "/v1/ops/incidents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": false,
+    "audit": false,
+    "status": "contract"
+  },
+  {
+    "id": "ops.incidents.create",
+    "method": "POST",
+    "path": "/v1/ops/incidents",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.incidents.action",
+    "method": "POST",
+    "path": "/v1/ops/incidents/{id}/actions/execute",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.incidents.update",
+    "method": "PATCH",
+    "path": "/v1/ops/incidents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  },
+  {
+    "id": "ops.incidents.delete",
+    "method": "DELETE",
+    "path": "/v1/ops/incidents/{id}",
+    "auth": "OIDC+tenant+scope",
+    "idempotency": true,
+    "audit": true,
+    "status": "contract"
+  }
+];
