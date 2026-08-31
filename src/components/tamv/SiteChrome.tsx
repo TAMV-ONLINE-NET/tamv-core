@@ -7,6 +7,8 @@ const NAV = [
   { to: "/arquitectura", label: "Arquitectura" },
   { to: "/economia", label: "Economía" },
   { to: "/guardian", label: "Guardián" },
+  { to: "/ledger", label: "Ledger" },
+  { to: "/apis", label: "APIs" },
 ] as const;
 
 export function SiteChrome({ children }: { children: ReactNode }) {
