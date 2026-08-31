@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApisRouteImport } from './routes/apis'
 import { Route as ArquitecturaRouteImport } from './routes/arquitectura'
 import { Route as EconomiaRouteImport } from './routes/economia'
 import { Route as GuardianRouteImport } from './routes/guardian'
@@ -19,6 +20,11 @@ import { Route as LedgerRouteImport } from './routes/ledger'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApisRoute = ApisRouteImport.update({
+  id: '/apis',
+  path: '/apis',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArquitecturaRoute = ArquitecturaRouteImport.update({
@@ -49,6 +55,7 @@ const LedgerRoute = LedgerRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/apis': typeof ApisRoute
   '/arquitectura': typeof ArquitecturaRoute
   '/economia': typeof EconomiaRoute
   '/guardian': typeof GuardianRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/apis': typeof ApisRoute
   '/arquitectura': typeof ArquitecturaRoute
   '/economia': typeof EconomiaRoute
   '/guardian': typeof GuardianRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/apis': typeof ApisRoute
   '/arquitectura': typeof ArquitecturaRoute
   '/economia': typeof EconomiaRoute
   '/guardian': typeof GuardianRoute
@@ -75,13 +84,26 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella' | '/ledger'
+    | '/'
+    | '/apis'
+    | '/arquitectura'
+    | '/economia'
+    | '/guardian'
+    | '/isabella'
+    | '/ledger'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/arquitectura' | '/economia' | '/guardian' | '/isabella' | '/ledger'
+    | '/'
+    | '/apis'
+    | '/arquitectura'
+    | '/economia'
+    | '/guardian'
+    | '/isabella'
+    | '/ledger'
   id:
     | '__root__'
     | '/'
+    | '/apis'
     | '/arquitectura'
     | '/economia'
     | '/guardian'
@@ -91,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApisRoute: typeof ApisRoute
   ArquitecturaRoute: typeof ArquitecturaRoute
   EconomiaRoute: typeof EconomiaRoute
   GuardianRoute: typeof GuardianRoute
@@ -105,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apis': {
+      id: '/apis'
+      path: '/apis'
+      fullPath: '/apis'
+      preLoaderRoute: typeof ApisRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/arquitectura': {
@@ -147,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApisRoute: ApisRoute,
   ArquitecturaRoute: ArquitecturaRoute,
   EconomiaRoute: EconomiaRoute,
   GuardianRoute: GuardianRoute,
