@@ -37,7 +37,7 @@ export const Route = createFileRoute("/api/chat")({
         const result = streamText({
           model: gateway(ISABELLA_MODEL),
           system: buildSystemPrompt(body.mode ?? "canon", body.plane),
-          messages: convertToModelMessages(body.messages ?? []),
+          messages: await convertToModelMessages(body.messages ?? []),
           stopWhen: stepCountIs(50),
           abortSignal: request.signal,
           tools: {
